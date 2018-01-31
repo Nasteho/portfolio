@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- FAVICON ICON -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/manifest.json">
+    <link rel="mask-icon" href="assets/images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <!-- ADOBE ANIMATE INTRO TEKST -->
+    <meta name="authoring-tool" content="Adobe_Animate_CC">
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script src="assets/js/nastehoelmi.js"></script>
+    <script>
+    var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+    function init() {
+    	canvas = document.getElementById("canvas");
+    	anim_container = document.getElementById("animation_container_forside");
+    	dom_overlay_container = document.getElementById("dom_overlay_container");
+    	var comp=AdobeAn.getComposition("8F4C24C5BCE849888EC07D5648513041");
+    	var lib=comp.getLibrary();
+    	var loader = new createjs.LoadQueue(false);
+    	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+    	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+    	var lib=comp.getLibrary();
+    	loader.loadManifest(lib.properties.manifest);
+    }
+    function handleFileLoad(evt, comp) {
+    	var images=comp.getImages();
+    	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }
+    }
+    function handleComplete(evt,comp) {
+    	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+    	var lib=comp.getLibrary();
+    	var ss=comp.getSpriteSheet();
+    	var queue = evt.target;
+    	var ssMetadata = lib.ssMetadata;
+    	for(i=0; i<ssMetadata.length; i++) {
+    		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+    	}
+    	exportRoot = new lib.introtekst();
+    	stage = new lib.Stage(canvas);
+    	//Registers the "tick" event listener.
+    	fnStartAnimation = function() {
+    		stage.addChild(exportRoot);
+    		createjs.Ticker.setFPS(lib.properties.fps);
+    		createjs.Ticker.addEventListener("tick", stage);
+    	}
+    	//Code to support hidpi screens and responsive scaling.
+    	function makeResponsive(isResp, respDim, isScale, scaleType) {
+    		var lastW, lastH, lastS=1;
+    		window.addEventListener('resize', resizeCanvas);
+    		resizeCanvas();
+    		function resizeCanvas() {
+    			var w = lib.properties.width, h = lib.properties.height;
+    			var iw = window.innerWidth, ih=window.innerHeight;
+    			var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;
+    			if(isResp) {
+    				if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {
+    					sRatio = lastS;
+    				}
+    				else if(!isScale) {
+    					if(iw<w || ih<h)
+    						sRatio = Math.min(xRatio, yRatio);
+    				}
+    				else if(scaleType==1) {
+    					sRatio = Math.min(xRatio, yRatio);
+    				}
+    				else if(scaleType==2) {
+    					sRatio = Math.max(xRatio, yRatio);
+    				}
+    			}
+    			canvas.width = w*pRatio*sRatio;
+    			canvas.height = h*pRatio*sRatio;
+    			canvas.style.width = dom_overlay_container.style.width = anim_container.style.width =  w*sRatio+'px';
+    			canvas.style.height = anim_container.style.height = dom_overlay_container.style.height = h*sRatio+'px';
+    			stage.scaleX = pRatio*sRatio;
+    			stage.scaleY = pRatio*sRatio;
+    			lastW = iw; lastH = ih; lastS = sRatio;
+    			stage.tickOnUpdate = false;
+    			stage.update();
+    			stage.tickOnUpdate = true;
+    		}
+    	}
+    	makeResponsive(true,'both',true,1);
+    	AdobeAn.compositionLoaded(lib.properties.id);
+    	fnStartAnimation();
+    }
+    </script>
+    <title>Nasteho Elmi, Multimediedesigner studerende </title>
+  </head>
+    <header>
+    <div class="container">
+      <img src="assets/images/logonavbar.png" alt="logo" class="logo">
+      <nav>
+          <ul>
+            <li> <a href="http://nastehoelmi.dk" >HJEM</a></li>
+            <li> <a href="http://nastehoelmi.dk/index.html#ommig" > OM MIG </a></li>
+            <li> <a href="http://nastehoelmi.dk/index.html#arbejde" > ARBEJDE </a></li>
+            <li> <a href="http://nastehoelmi.dk/index.html#blog" > BLOG </a></li>
+            <li> <a href="http://nastehoelmi.dk/index.html#kontakt" > KONTAKT </a></li>
+          </ul>
+      </nav>
+    </div>
+    </header>
+
+      <main>
+        <body onload="init();" style="margin:0px;">
+          <div id="animation_container_forside" style="background-color:rgba(255, 255, 255, 1.00); width:809px; height:492px">
+        		<canvas id="canvas" width="809" height="492" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+        		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:809px; height:492px; position: absolute; left: 0px; top: 0px; display: block;">
+        		</div>
+          </div>
+
+
+          <div class="ommig">
+          <h1 class="overskrifter"> OM MIG</h1>
+          <hr>
+          <div id="ommigtekst">
+          <div id="venstre">
+            <div id="hvemerjeg">
+              <h1>HVEM ER JEG</h1>
+                <p>
+                  Jeg hedder Nasteho Hirsi Elmi er i skrivende stund 20 år gammel. Jeg er opvokset i Odense men er født i Middelfart. Jeg læser til Multimediedesign på Erhvervsakademiet Lillebælt i Odense. Jeg har et selvkritisk øje når til kommer til udførelse af arbejde, hvilket betyder at der ifølge mig altid er plads til forbedringer. Jeg er ikke bange for at indrømme mine fejl. ”the only way to great work is to love what you do’’, hvilket betyder at det vigtigt for mig at der er kærlighed i alt hvad jeg laver. </p>
+          </div>
+          <div id="hvadkanjegtilbyde">
+              <h1>HVAD KAN JEG TILBYDE</h1>
+                <p>
+                  Jeg er god til at tilpasse mig nye arbejdsmiljøer. Derfor er jeg altid åben for udfordringer, og glæder mig altid til at prøve noget nyt. Hver gang jeg beslutter mig for, at prøve noget nyt, sørger jeg altid for at gøre mit bedste.  Jeg er en teamplayer og elsker at arbejde i teams fordi jeg mener at forskellige typer sammensat skaber noget stort, og fordi teamwork gøre det muligt at lære af hinanden og udvider horisonter.</p>
+                </div>
+              </div>
+                <div id="højre">
+                  <div id="kreativitet">
+                  <h1>KREATIVITET</h1>
+                  <p>Lige siden jeg kan huske, har altid fundet fred i at udfolde mig kreativt. Det virkelig gik op for mig i en tidlig alder, da folkeskole projekter da bestod af håndværk i form af tegninger og historier som altid fik et særligt sted i mit hjerte, når jeg f.eks. ville sidde i flere timer ad gangen og fifle med projektet. Det har senere udviklet sig, at jeg for 6 måneder siden, tog skridtet og begav mig ud på det sociale medier, herunder Instagram.</p>
+                </div>
+                <div id="socialemedier">
+                  <h1>SOCIALE MEDIER</h1>
+                    <p>De sociale medier, giver mig mulighed for at udforske mit kunstneriske felt. Jeg lever af mottoet ’’øvelse gør mester’’- fordi jeg opdaterer min side kontinuerlig, får jeg mulighed for at videreudvikle mine færdigheder. På min side arbejder jeg med makeup og skønhed, fordi jeg interesser mig for det. Hvis man ser udover skønhedsdelen af siden, erfarer jeg en del ting, såsom videoredigering, selvdisciplin osv. </p>
+                  </div>
+                </div>
+        </div>
+      </div>
+
+        <section>
+
+          <h1 class="mitarbejde" id="arbejde"> MIT ARBEJDE<hr></h1>
+
+          <div class="container2">
+              <img src="assets/images/eallogo.jpg" alt="EAL logo">
+                <div class="info">
+                  <h1> REDESIGN AF EAL.DK </h1>
+                  <p> Erhvervsakadamiet Lillebælt ønsker at renovere EAL.DK således det er nemmere for besøgende at finde oplysninger og optimere tiden der bruges på hjemmesiden. Her var opgaven at evaluere udvalgte forsider og undersider.</p>
+                  <a href="http://nastehoelmi.dk/project1.html"> LÆS MERE </a>
+            </div>
+          </div>
+
+          <div class= "container2" id="projekt2container">
+            <img src="assets/images/fredericiamuseumlogo.png" alt="Fredericia Museum Logo">
+              <div class="info" id="projekt2info">
+                <h1> INSTALLATIONSKONCEPT FOR FREDERICIA-VOLDENE </h1>
+                <p> Formålet med dette projekt var at udvikle et installationskoncept for fredericia voldene for Fredericia Museum. Dette skyldes Fredericia Musuems ønske om at tilbyde forskellige målgrupper andre spændende og nytænknende måder at opnå viden</p>
+                <a href="http://nastehoelmi.dk/project2.html"> LÆS MERE </a>
+              </div>
+          </div>
+
+
+
+          <div class="container2" id="ownwork">
+            <img src="assets/images/egetarbejde.jpg" alt="logo">
+              <div class="info" id="ownworkinfo">
+                <h1> EGET ARBEJDE </h1>
+                <p> Her er det muligt at se originaler værker.</p>
+                <a href="http://nastehoelmi.dk/ownwork.html"> LÆS MERE </a>
+              </div>
+          </div>
+
+          <div class="container2" id="blog">
+            <img src="assets/images/penblog.jpg" alt="pen illustration">
+              <div class="info" id="bloginfo">
+                <h1> BLOG </h1>
+                <p> Her er det muligt at følge med i det arbejde jeg udfører og de refleksioner jeg ligeledes har. Jeg deler altså i denne blog, min process over mit arbejde. Og der vil over en længere periode (forhåbentligt) ses den fremskridt jeg har gjort </p>
+                <a href="http://www.nastehoelmi.dk/blog"> LÆS MERE </a>
+              </div>
+          </div>
+
+        </section>
+
+        <footer>
+          <h1> KONTAKT </h1>
+          <div id="kontakt">
+            <div id="mail">
+          <img src="assets/images/mail.png" alt="mail ikon">
+            <p>EMAIL</p>
+          <a href="mailto:contact@nastehoelmi.dk">contact@nastehoelmi.dk</a>
+        </div>
+
+        <div id="tlf">
+          <img src="assets/images/tlf.png" alt="telefon ikon">
+          <p>RING</p>
+          <a href= "tel:+4528872120">+28872120</a>
+        </div>
+
+        <div id="instagram">
+          <img src="assets/images/instagram.png">
+          <p>INSTAGRAM</p>
+          <a href="http://www.instagram.com/nasteexoilwaad">@nasteexoilwaad</a>
+        </div>
+      </div>
+
+        </footer>
+      </main>
+  </body>
+</html>

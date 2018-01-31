@@ -1,0 +1,27 @@
+<manifest alg="2" build="2018.0.0.379" opt="true" iceEnabled="true" iceMarkupVersion="2" iceEnabledOptions="link,responsive,cachebuster,textStyling" exportTarget="other" domain="nastehoelmi.dk" resolutions="1x" timestamp="1512722562353">
+  <folder name="css">
+    <file name="site_global.css" crc="444006867"/>
+    <file name="index.css" crc="21961897" ref="index"/>
+    <file name="untitled-2.css" crc="264380269" ref="untitled-2"/>
+  </folder>
+  <folder name="scripts">
+    <file name="jquery-1.8.3.min.js" crc="209076791" ref="index:untitled-2"/>
+    <file name="museutils.js" crc="3803043152" ref="index:untitled-2"/>
+    <file name="whatinput.js" crc="86476730" ref="index:untitled-2"/>
+    <file name="museconfig.js" crc="4153641093" ref="index:untitled-2"/>
+    <file name="jquery.watch.js" crc="99325471" ref="index:untitled-2"/>
+    <file name="require.js" crc="4157109226" ref="index:untitled-2"/>
+  </folder>
+  <folder name="images">
+    <file name="web-1920-–-1.svg" crc="4236522939" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="web 1920 – 1_poster_.png" crc="56393799" ref="index"/>
+    <file name="web-1920-–-2.svg" crc="123202554" seo="true" ref="untitled-2">
+      <caption webpage="untitled-2" alt=""/>
+    </file>
+    <file name="web 1920 – 2_poster_.png" crc="237336446" ref="untitled-2"/>
+  </folder>
+  <file name="index.html" crc="4090180886" seo="true" mt="1512722479680" redirect="true"/>
+  <file name="untitled-2.html" crc="322663850" seo="true" mt="1512722526180" redirect="true"/>
+</manifest>

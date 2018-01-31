@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="authoring-tool" content="Adobe_Animate_CC">
+    <title>Arbejde</title>
+    <!--MUSE PROTOTYPE-->
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script src="assets/js/redesignanimation.js"></script>
+    <!--ADOBE ANIMATE -->
+    <script>
+        var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+        function init() {
+        	canvas = document.getElementById("canvas");
+        	anim_container = document.getElementById("animation_container");
+        	dom_overlay_container = document.getElementById("dom_overlay_container");
+        	var comp=AdobeAn.getComposition("E12109B558014A5C84510E5A67C85D19");
+        	var lib=comp.getLibrary();
+        	var loader = new createjs.LoadQueue(false);
+        	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+        	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+        	var lib=comp.getLibrary();
+        	loader.loadManifest(lib.properties.manifest);
+        }
+        function handleFileLoad(evt, comp) {
+        	var images=comp.getImages();
+        	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }
+        }
+        function handleComplete(evt,comp) {
+        	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+        	var lib=comp.getLibrary();
+        	var ss=comp.getSpriteSheet();
+        	var queue = evt.target;
+        	var ssMetadata = lib.ssMetadata;
+        	for(i=0; i<ssMetadata.length; i++) {
+        		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+        	}
+        	var preloaderDiv = document.getElementById("_preload_div_");
+        	preloaderDiv.style.display = 'none';
+        	canvas.style.display = 'block';
+        	exportRoot = new lib.Untitled1();
+        	stage = new lib.Stage(canvas);
+        	//Registers the "tick" event listener.
+        	fnStartAnimation = function() {
+        		stage.addChild(exportRoot);
+        		createjs.Ticker.setFPS(lib.properties.fps);
+        		createjs.Ticker.addEventListener("tick", stage);
+        	}
+        	//Code to support hidpi screens and responsive scaling.
+        	function makeResponsive(isResp, respDim, isScale, scaleType) {
+        		var lastW, lastH, lastS=1;
+        		window.addEventListener('resize', resizeCanvas);
+        		resizeCanvas();
+        		function resizeCanvas() {
+        			var w = lib.properties.width, h = lib.properties.height;
+        			var iw = window.innerWidth, ih=window.innerHeight;
+        			var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;
+        			if(isResp) {
+        				if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {
+        					sRatio = lastS;
+        				}
+        				else if(!isScale) {
+        					if(iw<w || ih<h)
+        						sRatio = Math.min(xRatio, yRatio);
+        				}
+        				else if(scaleType==1) {
+        					sRatio = Math.min(xRatio, yRatio);
+        				}
+        				else if(scaleType==2) {
+        					sRatio = Math.max(xRatio, yRatio);
+        				}
+        			}
+        			canvas.width = w*pRatio*sRatio;
+        			canvas.height = h*pRatio*sRatio;
+        			canvas.style.width = anim_container.style.width = dom_overlay_container.style.width = preloaderDiv.style.width = w*sRatio+'px';
+        			canvas.style.height = anim_container.style.height = dom_overlay_container.style.height = preloaderDiv.style.height = h*sRatio+'px';
+        			stage.scaleX = pRatio*sRatio;
+        			stage.scaleY = pRatio*sRatio;
+        			lastW = iw; lastH = ih; lastS = sRatio;
+        			stage.tickOnUpdate = false;
+        			stage.update();
+        			stage.tickOnUpdate = true;
+        		}
+        	}
+        	makeResponsive(true,'both',false,1);
+        	AdobeAn.compositionLoaded(lib.properties.id);
+        	fnStartAnimation();
+        }
+        </script>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto:300" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/manifest.json">
+    <link rel="mask-icon" href="assets/images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <title> Nasteho Elmi </title>
+  </head>
+
+  <body onload="init();" style="margin:0px;">
+    <header>
+    <div class="container">
+      <img src="assets/images/logonavbar.png" alt="logo" class="logo">
+      <nav>
+          <ul>
+              <li> <a href="http://nastehoelmi.dk" >HJEM</a></li>
+            <li> <a href="http://nastehoelmi.dk/index.html#ommig" > OM MIG </a></li>
+            <li> <a href="http://nastehoelmi.dk/index.html#arbejde" > ARBEJDE </a></li>
+            <li> <a href="http://nastehoelmi.dk/index.html#blog" > BLOG </a></li>
+            <li> <a href="http://nastehoelmi.dk/index.html#kontakt" > KONTAKT </a></li>
+          </ul>
+      </nav>
+    </div>
+    </header>
+    <main>
+      <div class="headlines">
+        <h4>REDESIGN AF EAL.DK</h4>
+        <hr>
+        <!--ADOBE ANIMATE -->
+        <div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:700px; height:375px">
+          <canvas id="canvas" width="700" height="375" style="position: absolute; display: none; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+          <div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:700px; height:375px; position: absolute; left: 0px; top: 0px; display: none;">
+          </div>
+        </div>
+          <div id='_preload_div_' style='position:absolute; top:0; left:0; display: inline-block; height:375px; width: 700px; text-align: center;'>	<span style='display: inline-block; height: 100%; vertical-align: middle;'></span>	<img src=assets/images/_preloader.gif style='vertical-align: middle; max-height: 100%'/></div>
+
+          <article class="projectdescriptions">
+            <p>Dette projekts formål, var at redesigne Erhvervsakadamiet Lillebælt’s hjemmeside (EAL.DK). EAL ønskede at optimere brugervenligheden og effektivere en besøgendes tid på EAL.DK. Jeg og 3 andre gruppemedlemmer blev sat for at analysere den internationale udgave af EAL.DK, herunder valgte vi at sætte vores fokus på forsiden ’Studying at EAL’ og undersiden ’International possibilities’. Ved evalueringen, fandt vi mulige udfordringer – vi udarbejdede derfor et løsningsforslag til et redesign.</p>
+            <a href="http://nastehoelmi.dk/redesign.html">SE DEN NYE SIDE HER</a>
+            <a href="https://www.eal.dk/international/studying-at-eal/">BESØG DEN ORIGINALE SIDE HER</a>
+          </article>
+
+
+          <footer>
+            <h1> KONTAKT </h1>
+            <div id="kontakt">
+              <div id="mail">
+            <img src="assets/images/mail.png" alt="mail ikon">
+              <p>EMAIL</p>
+            <a href="mailto:contact@nastehoelmi.dk">contact@nastehoelmi.dk</a>
+          </div>
+
+          <div id="tlf">
+            <img src="assets/images/tlf.png" alt="telefon ikon">
+            <p>RING</p>
+            <a href= "tel:+4528872120">+28872120</a>
+          </div>
+
+          <div id="instagram">
+            <img src="assets/images/instagram.png">
+            <p>INSTAGRAM</p>
+            <a href="http://www.instagram.com/nasteexoilwaad">@nasteexoilwaad</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

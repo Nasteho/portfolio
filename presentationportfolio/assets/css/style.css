@@ -1,0 +1,430 @@
+body {
+  margin: 0;
+  background: white;
+  padding: 0;
+}
+
+body h1 {
+  font-size: 19px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+body p {
+  font-size: 15px;
+  word-spacing: 2px;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 30px;
+}
+
+body a {
+  text-decoration: none;
+  color: #DAA520;
+  opacity: 1;
+}
+
+header a:hover{
+  opacity: 0.6;
+}
+.container {
+  width: 100%;
+}
+
+header{
+  background: white;
+  box-shadow: 0 0 10px 0 grey;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}
+
+.logo {
+  float: left;
+  padding: 15px 0;
+  margin-left: 130px;
+}
+
+nav {
+float: right;
+
+}
+
+nav ul {
+  padding: 10px 0;
+  list-style: none;
+  margin-right: 110px;
+}
+
+nav li {
+  font-weight: 200;
+  font-family: 'Open Sans', sans-serif;
+  display: inline-flex;
+  margin-right: 40px;
+  letter-spacing: 2px;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes gradient {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+@-webkit-keyframes gradient {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.introcitat img {
+  display: flex;
+  width: 50%;
+  margin: auto;
+}
+
+section h1 {
+  color: #DAA520;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.overskrifter {
+  text-align: center;
+}
+
+.mitarbejde{
+  text-align: center;
+}
+
+hr {
+  width: 70px;
+  opacity: 0.6;
+}
+
+.mitarbejde hr{
+  width: 120px;
+  margin-bottom: 70px;
+}
+
+.container2 {
+   background: rgba(218, 165, 32, 0.7);
+   display: flex;
+   vertical-align: top;
+   padding: 20px 20px;
+
+   font-weight: 300;
+   text-align: left;
+
+ }
+
+ .container2 h1 {
+   color: white;
+   font-weight: 300;
+   font-size: 16px;
+ }
+
+ #projekt2container {
+   background: white;
+
+ }
+
+#projekt2container h1 {
+  color: #DAA520;
+}
+
+#ommigtekst{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 70px 0 150px 0;
+}
+
+.ommig p {
+  text-align: justify;
+  font-size: 14px;
+}
+
+.ommig h1 {
+  color: #DAA520;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.ommig{
+  margin: 0 110px;
+}
+
+.container2 p {
+  font-size: 14px;
+}
+
+
+#nastehoelmi{
+  padding: 0;
+  padding-bottom: 80px;
+}
+
+#kreativitet, #socialemedier, #hvadkanjegtilbyde, #hvemerjeg{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+#venstre{
+  align-self:flex-start;
+}
+
+#højre {
+  align-self: : flex-end;
+}
+
+.container2 img {
+   margin-left: 100px;
+   margin-right: 30px;
+   padding: 70px 0;
+ }
+
+
+.info{
+  padding: inherit;
+  margin: 10px 10px;
+  margin-right: 140px;
+  text-align: justify;
+  padding: 45px 0;
+  color: white;
+
+}
+
+#projekt2info{
+  color: #DAA520;
+}
+
+.info a{
+  background: white;
+  align-items: center;
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: none;
+  color: #DAA520;
+  padding: 5px;
+  font-size: 13px;
+}
+
+#projekt2info a{
+  background: #DAA520;
+  color: white;
+}
+
+#projekt2info h1 {
+  text-align: left;
+}
+
+#bloginfo a{
+  background: #DAA520;
+  color: white;
+}
+
+#bloginfo {
+  color: #DAA520;
+}
+#blog {
+  background: white;
+
+}
+
+#blog h1 {
+ color: #DAA520;
+}
+
+
+
+footer{
+  background: rgba(218, 165, 32, 0.7);
+  margin: 0;
+
+}
+#kontakt hr {
+  width: 100px;
+  opacity: 0.6;
+  padding-bottom: 0;
+
+}
+footer h1 {
+  padding-top: 40px;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+  color: white;
+  margin-left: 80px;
+}
+
+#kontakt p{
+  color: white;
+font-weight: 300;
+font-size: 20px;
+}
+
+#kontakt{
+  padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+
+#mail, #tlf, #instagram{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+#kontakt a:hover {
+
+  text-decoration: underline;
+}
+
+
+footer a {
+  text-align: center;
+  padding: 40px;
+  color: white;
+  font-size: 16px;
+  letter-spacing: 4px;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}
+
+#slider {
+  overflow: hidden;
+}
+
+#slider figure img {
+  width: 20%;
+  float: left;
+}
+
+#slider figure {
+  position: relative;
+  width: 500%;
+  margin: 0;
+  animation: 30s imageslider infinite;
+}
+
+.imagesize {
+  width: 40%;
+  margin: auto;
+}
+
+@keyframes imageslider {
+0% {
+  left: 0%;
+}
+20% {
+  left: 0%;
+}
+25% {
+  left: -100%;
+}
+45% {
+  left: -100%;
+}
+50% {
+  left: -200%;
+}
+70% {
+  left: -200%;
+}
+75% {
+  left: -300%;
+}
+95% {
+  left: -300%;
+}
+100% {
+  left: -400%;
+}
+}
+
+.headlines h4 {
+  margin-top: 0;
+  font-weight: 300;
+  font-size: 20px;
+  color: #DAA520;
+  padding-top: 150px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.headlines hr {
+  width: 60%;
+  margin-bottom: 70px;
+}
+
+article {
+    padding: 10px 110px;
+}
+
+article a{
+margin-bottom: 20px;
+
+}
+
+article p{
+  color: #DAA520;
+  text-align: justify;
+  padding-bottom: 20px;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 200;
+}
+
+
+.projectdescriptions2 a {
+  background: #DAA520;
+  color:white;
+  padding: 5px;
+  font-weight: 200px;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 200;
+}
+
+.projectdescriptions a {
+  background: #DAA520;
+  color:white;
+  padding: 5px;
+  font-weight: 200px;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#animation_container, #_preload_div_ {
+
+margin:auto;
+left:0;right:0;
+top:0;bottom:0;
+padding-top: 0;
+padding-bottom: 70px;
+
+}
+
+#workheadline {
+  margin-top: 0;
+  font-weight: 300;
+  font-size: 100px;
+  color: #DAA520;
+  padding-top: 300px;
+  text-align: center;
+}
+
+#animation_container_forside{
+  margin:0;
+  left:0;right:0;
+  top:0;bottom:0;
+  margin-bottom: 100px;
+}
